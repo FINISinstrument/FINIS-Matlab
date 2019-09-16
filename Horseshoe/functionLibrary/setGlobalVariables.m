@@ -15,12 +15,8 @@ global bitmap
 
 [optimizer, metric] = imregconfig('monomodal');
 
-%{
-basepath = [filesep 'Volumes' filesep 'GoogleDrive' filesep 'My Drive' filesep...
-    'FINIS' filesep '11) Science and Post-Processing' filesep...
+basepath = [google_drive_path filesep '11) Science and Post-Processing' filesep...
     'Saved parameters'];
-%}
-basepath = 'Saved parameters';
 
 gain = load([basepath filesep 'Radiometric.mat'], 'gain');
 gain = gain.gain;
