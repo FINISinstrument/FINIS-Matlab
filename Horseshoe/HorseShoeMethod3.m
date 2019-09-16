@@ -31,11 +31,17 @@
 
 %}
 
+% Set machine-specific paths
+addpath(genpath('..'));
+global google_drive_path
+global external_drive_path
+global output_drive_path
+SetLocalPaths();
+% Print the google_drive_path to make sure it was set correctly
+google_drive_path
 
 % User provided information (set these values manually)
-%pathname = '/Volumes/Seagate Expansion Drive/Aug 2nd CAL/UTAH/Fri_Aug__2_14-09-43_2019';
-pathname = '/mnt/Aug 2nd CAL/UTAH/Fri_Aug__2_14-09-43_2019';
-%pathname = 'Fri_Aug__2_14-09-43_2019';
+pathname = [external_drive_path '/Aug 2nd CAL/UTAH/Fri_Aug__2_14-09-43_2019'];
 df = 4000; % distance to scene in FEET
 frameRate = 33.33;
 global video
@@ -84,7 +90,7 @@ cubeSize = [numRows, numCols, numFrames];
 
 % If applicable, set up to record a video
 if (video == 1)
-    %v = VideoWriter(strcat([filesep 'Volumes' filesep 'GoogleDrive' filesep 'My Drive'  filesep 'FINIS' filesep '11) Science and Post-Processing' filesep 'Videos' filesep 'RawVideo' filesep name '.mp4']), 'MPEG-4');
+    v = VideoWriter(strcat([google_drive_path filesep '11) Science and Post-Processing' filesep 'Videos' filesep 'RawVideo' filesep name '.mp4']), 'MPEG-4');
     %v = VideoWriter(strcat(['Videos' filesep name '.mp4']), 'MPEG-4');
     v.FrameRate = 30;  % Default 30
     open(v);
