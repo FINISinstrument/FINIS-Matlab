@@ -8,7 +8,7 @@ global output_drive_path
 SetLocalPaths();
 % End machine-specific paths
 
-filename = 'MethaneTest2_061019_padded';
+filename = 'Flat_Field_Calibration_Aug16-2019';
 showFig = 0;
 
 %Calculate Flat_Field parameters 
