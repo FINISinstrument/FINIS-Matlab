@@ -1,4 +1,4 @@
-function [gain, offset] = Flat_Field_Calibration(filename, boolShowFig)
+function [gain, offset] = Flat_Field_Calibration(base_path, filename, boolShowFig)
 % Set variables
 start_frame = 5;
 end_frame   = 9;
@@ -9,8 +9,8 @@ exposure_count = 31;
 
 % Load the data
 % filename = 'MethaneTest2_061019_padded';
-[nitrogen] = Load_Raw_Flat_Field(filename,start_frame,end_frame,...
-    frames_per_exposure,start_exposure,exposure_count);
+[nitrogen] = Load_Raw_Flat_Field(base_path,filename,start_frame,end_frame,...
+    frames_per_exposure,exposure_count);
 
 % Generate Flat Field Calibration Data
 [gain, offset] = Calculate_Flat_Field_Calibration(nitrogen,frames_per_exposure,...

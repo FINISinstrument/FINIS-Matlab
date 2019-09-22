@@ -8,17 +8,20 @@ global output_drive_path
 SetLocalPaths();
 % End machine-specific paths
 
-filename = 'Flat_Field_Calibration_Aug16-2019';
+datename = 'Flat_Field_Calibration_Aug16-2019';
 showFig = 0;
 
-%Calculate Flat_Field parameters 
-[gain, offset] = Flat_Field_Calibration(filename, showFig);
+% Apply calibration to left orientation
+Calibrate_Orientation([google_drive_path filesep '11) Science and Post-Processing'...
+    filesep 'Test Data' filesep datename 'Sun Variable Exposure'], 'Left',...
+    'LeftCalibration', 0);
 
-%Calculate Sensitivity Map
-sensitivityMap = Generate_Sensitivity_Map(filename, gain, offset, showFig);
+% Apply calibration to right orientation
+Calibrate_Orientation([google_drive_path filesep '11) Science and Post-Processing'...
+    filesep 'Test Data' filesep datename 'Sun Variable Exposure'], 'Right',...
+    'RightCalibration', 0);
 
-% Set save directory to be in ImageCalibration in Google Drive
-save_path = [output_drive_path filesep '11) Science and Post-Processing' filesep 'ImageCalibration'];
-
-save([save_path filesep 'Radiometric'], 'gain', 'offset');
-save([save_path filesep 'sensitivity'], 'sensitivityMap');
+% Apply cablibration to down orientation
+Calibrate_Orientation([google_drive_path filesep '11) Science and Post-Processing'...
+    filesep 'Test Data' filesep datename 'Sun Variable Exposure'], 'Down',...
+    'DownCalibration', 0);
