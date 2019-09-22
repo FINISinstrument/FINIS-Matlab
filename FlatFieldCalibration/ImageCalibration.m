@@ -11,17 +11,25 @@ SetLocalPaths();
 datename = 'Flat_Field_Calibration_Aug16-2019';
 showFig = 0;
 
+src_path  = [output_drive_path filesep '11) Science and Post-Processing'...
+    filesep, 'Test Data' filesep datename filesep 'Sun Variable Exposure'];
+dest_path = [output_drive_path filesep '11) Science and Post-Processing'...
+    filesep, 'Test Data' filesep datename filesep 'Calibrated'];
+
+% Get calibration for left orientation
+[gain, offset] = Calibrate_Orientation(src_path, 'Left', 'LeftCalibration', 0);
 % Apply calibration to left orientation
-Calibrate_Orientation([google_drive_path filesep '11) Science and Post-Processing'...
-    filesep 'Test Data' filesep datename 'Sun Variable Exposure'], 'Left',...
-    'LeftCalibration', 0);
+Apply_FlatField_Folder([src_path filepath 'Left'],[dest_path filesep 'Left'],...
+    gain, offset);
 
-% Apply calibration to right orientation
-Calibrate_Orientation([google_drive_path filesep '11) Science and Post-Processing'...
-    filesep 'Test Data' filesep datename 'Sun Variable Exposure'], 'Right',...
-    'RightCalibration', 0);
+% Get calibration for right orientation
+[gain, offset] = Calibrate_Orientation(src_path, 'Right', 'RightCalibration', 0);
+% Apply calibration to left orientation
+Apply_FlatField_Folder([src_path filepath 'Right'],[dest_path filesep 'Right'],...
+    gain, offset);
 
-% Apply cablibration to down orientation
-Calibrate_Orientation([google_drive_path filesep '11) Science and Post-Processing'...
-    filesep 'Test Data' filesep datename 'Sun Variable Exposure'], 'Down',...
-    'DownCalibration', 0);
+% Get cablibration for down orientation
+[gain, offset] = Calibrate_Orientation(src_path, 'Down', 'DownCalibration', 0);
+% Apply calibration to left orientation
+Apply_FlatField_Folder([src_path filepath 'Down'],[dest_path filesep 'Down'],...
+    gain, offset);
