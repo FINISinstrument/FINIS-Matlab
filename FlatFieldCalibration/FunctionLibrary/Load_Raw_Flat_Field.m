@@ -6,15 +6,16 @@
     time.
     It is left to the calibration function to correctly parse this data. 
 %}
-function [nitrogen] = Load_Raw_Flat_Field(base_path, filename,...
+function [nitrogen] = Load_Raw_Flat_Field(path,...
     start_frame, end_frame,...
     frame_per_exposure, exposure_count)
 %'MethaneTest2_061019_padded'
-image_src = fullfile([base_path filesep filename]);
+image_src = path;
 
 frames = end_frame - start_frame;
 
 % Nitrogen
+image_src
 frame_store = imageDatastore(image_src);
 nitrogen = zeros(256,320,33*frames);
 % Load in frames by exposure count
