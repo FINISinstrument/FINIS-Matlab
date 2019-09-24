@@ -8,23 +8,24 @@
 %}
 function [nitrogen] = Load_Raw_Flat_Field(path,...
     start_frame, end_frame,...
-    frame_per_exposure, exposure_count)
+    frame_per_exposure, start_exposure,...
+    end_exposure, exposure_count)
 %'MethaneTest2_061019_padded'
 image_src = path;
 
-frames = end_frame - start_frame;
+frames = end_frame - start_frame + 1;
 
 % Nitrogen
-image_src
 frame_store = imageDatastore(image_src);
-nitrogen = zeros(256,320,33*frames);
+nitrogen = zeros(256,320,exposure_count*frames);
 % Load in frames by exposure count
-for i = 1:frames
-    for j = 1:exposure_count
-        % Indexing for the readimage is wrong
+index = 0;
+for cur_frame = start_frame:end_frame
+    for cur_exposure = start_exposure:end_exposure
+        index = index + 1;
         % Read col major instead of row major
-        % row = (j-1)*frame_per_exposure
-        % col = i+start_frame-1
-        nitrogen(:,:,i*frames+j) = double(readimage(frame_store, ( (j-1)*frame_per_exposure + i+start_frame-1 ) ));
+        frame_loc = (cur_exposure-start_exposure)*frame_per_exposure + cur_frame;
+        
+        nitrogen(:,:,index) = double(readimage(frame_store, frame_loc));
     end
 end

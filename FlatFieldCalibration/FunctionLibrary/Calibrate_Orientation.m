@@ -14,6 +14,9 @@ function [gain, offset] = Calibrate_Orientation(src_path, dest_path, orientation
     %save_path = [output_drive_path filesep '11) Science and Post-Processing'...
     %    filesep 'Test Data' filesep out_name];
 
-    save([dest_path filesep orientation '_Radiometric'], 'gain', 'offset');
+    save([dest_path filesep orientation '_Radiometric.mat'], 'gain', 'offset');
+    % This is only for Nicholas, not sure why the above line doesn't work
+    % with rsync
+    %save('/home/chell/work/cse/finis/matlab/Radiometric.mat', 'gain', 'offset');
     %save([save_path filesep orientation '_sensitivity'], 'sensitivityMap');
 end

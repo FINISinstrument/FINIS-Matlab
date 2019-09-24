@@ -17,8 +17,8 @@ offset = zeros(256,320,exposure_count);
 for row = 1:256
     for col = 1:320
         % Calculate gain/offset for each frame index
-        for q = 1:exposure_count
-            I = squeeze(nitrogen(row,col,((q-1)*frames_per_exposure+1):(q*frames_per_exposure)));
+        for q = 1:frames_per_exposure
+            I = squeeze(nitrogen(row,col,((q-1)*exposure_count+1):(q*exposure_count)))';
             P = I/X';
             gain  (row,col,q) = P(1);
             offset(row,col,q) = P(2);

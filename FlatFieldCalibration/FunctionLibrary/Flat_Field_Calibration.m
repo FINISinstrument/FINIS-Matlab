@@ -9,14 +9,17 @@ exposure_count = 31;
 
 % Load the data
 % filename = 'MethaneTest2_061019_padded';
-[nitrogen] = Load_Raw_Flat_Field(base_path,start_frame,end_frame,...
-    frames_per_exposure,exposure_count);
+fprintf('Load_Raw_Flat_Field')
+[nitrogen] = Load_Raw_Flat_Field(base_path, start_frame, end_frame,...
+    frames_per_exposure, start_exposure, end_exposure, exposure_count);
 
+fprintf('Generate_Flat_Field_Calibration')
 % Generate Flat Field Calibration Data
-[gain, offset] = Calculate_Flat_Field_Calibration(nitrogen,frames_per_exposure,...
+[gain, offset] = Calculate_Flat_Field_Calibration(nitrogen,(end_frame-start_frame+1),...
     start_exposure, end_exposure, exposure_count);
 
 % Remove "Hot Pixels"
+fprintf('Remove Hot Pixels')
 [gain, offset] = Remove_Hot_Pixels(gain, offset);
 
 % Average Flat Field Data together
