@@ -14,13 +14,13 @@
 %}
 function [nitrogen, methane] = Load_Sensitivity_Map_Calibration(filename)
 global google_drive_path;
-%'MethaneTest2_061019_padded'
-n10 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Nitrogen' filesep '10.16cm']);
-n25 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Nitrogen' filesep '25cm']);
-n50 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Nitrogen' filesep '50cm']);
-m10 = fullfile([filesep 'Volumes' filesep 'GoogleDrive' filesep 'My Drive' filesep 'FINIS' filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '10.16cm']);
-m25 = fullfile([filesep 'Volumes' filesep 'GoogleDrive' filesep 'My Drive' filesep 'FINIS' filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '25cm']);
-m50 = fullfile([filesep 'Volumes' filesep 'GoogleDrive' filesep 'My Drive' filesep 'FINIS' filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '50cm']);
+%'MethaneCalibrationData_09.13.2019'
+n10 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '5cm']);
+n25 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '10.16cm']);
+n50 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '25cm']);
+m10 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '5cm']);
+m25 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '10.16cm']);
+m50 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '25cm']);
 
 numFrames = 33;
 
