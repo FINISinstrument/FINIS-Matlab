@@ -14,7 +14,7 @@ function [] = Apply_FlatField_Folder(src,dest,gain,offset)
         % Calibrate image
         img = Apply_Flat_Field_Calibration(img, gain, offset);
         % Save image
-        info = info.Filename
+        info = info.Filename;
         [fpath, fname, ext] = fileparts(info)
         imwrite(img, [dest filesep fname ext]);
     end
