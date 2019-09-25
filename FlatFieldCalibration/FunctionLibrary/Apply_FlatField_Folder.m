@@ -10,11 +10,12 @@ function [] = Apply_FlatField_Folder(src,dest,gain,offset)
     
     for i = 1:N
         % Read image
-        img = readimage(src_frames,i);
+        [img, info] = readimage(src_frames,i);
         % Calibrate image
         img = Apply_Flat_Field_Calibration(img, gain, offset);
         % Save image
-        [fpath, fname, ext] = src_frames.Files(i)4
+        info = info.Filename
+        [fpath, fname, ext] = fileparts(info)
         imwrite(img, [dest filesep fname ext]);
     end
 end
