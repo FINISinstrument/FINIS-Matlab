@@ -15,34 +15,34 @@
 function [nitrogen, methane] = Load_Sensitivity_Map_Calibration(filename)
 global google_drive_path;
 %'MethaneCalibrationData_09.13.2019'
-n10 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '5cm']);
-n25 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '10.16cm']);
-n50 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '25cm']);
-m10 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '5cm']);
-m25 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '10.16cm']);
-m50 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '25cm']);
+v5 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '5cm']);
+v10 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '10.16cm']);
+v25 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Vacuum' filesep '25cm']);
+m5 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '5cm']);
+m10 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '10.16cm']);
+m25 = fullfile([google_drive_path filesep '11) Science and Post-Processing' filesep 'Test Data' filesep filename filesep 'Methane' filesep '25cm']);
 
-numFrames = 33;
+numFrames = 31;
 
 % Nitrogen
-n10frames = imageDatastore(n10); 
-n25frames = imageDatastore(n25);
-n50frames = imageDatastore(n50);
-nitrogen = zeros(256,320,99);
+v5frames = imageDatastore(v5); 
+v10frames = imageDatastore(v10);
+v25frames = imageDatastore(v25);
+nitrogen = zeros(256,320,93);
 for i = 1:numFrames
-    nitrogen(:,:,i)    = double(readimage(n10frames,i));
-    nitrogen(:,:,i+33) = double(readimage(n25frames,i));
-    nitrogen(:,:,i+66) = double(readimage(n50frames,i));
+    nitrogen(:,:,i)    = double(readimage(v5frames,i));
+    nitrogen(:,:,i+31) = double(readimage(v10frames,i));
+    nitrogen(:,:,i+62) = double(readimage(v25frames,i));
 end
 
 
 % Methane
+m5frames = imageDatastore(m5);
 m10frames = imageDatastore(m10);
 m25frames = imageDatastore(m25);
-m50frames = imageDatastore(m50);
-methane = zeros(256,320,99);
+methane = zeros(256,320,93);
 for i = 1:numFrames
-    methane(:,:,i)    = double(readimage(m10frames,i));
-    methane(:,:,i+33) = double(readimage(m25frames,i));
-    methane(:,:,i+66) = double(readimage(m50frames,i));
+    methane(:,:,i)    = double(readimage(m5frames,i));
+    methane(:,:,i+31) = double(readimage(m10frames,i));
+    methane(:,:,i+62) = double(readimage(m25frames,i));
 end

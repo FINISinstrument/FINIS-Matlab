@@ -1,6 +1,6 @@
 function sensitivityMap = Generate_Sensitivity_Map(filename, gain, offset, boolShowFigs)
 
-%filename = 'MethaneCalibrationData_09.13.2019';
+filename = 'MethaneCalibrationData_09.13.2019';
 
 [nitrogen, methane] = Load_Sensitivity_Map_Calibration(filename);
 
