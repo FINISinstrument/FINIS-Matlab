@@ -17,11 +17,11 @@ dest_path = [output_drive_path filesep '11) Science and Post-Processing'...
     filesep, 'Test Data' filesep datename filesep 'Calibrated'];
 
 % Get calibration for left orientation
-[gain, offset] = Calibrate_Orientation(src_path, dest_path, 'Left', 'LeftCalibration', 0);
+[gain, offset] = Calibrate_Orientation(src_path, dest_path, 'Left', 'LeftCalibration', 1);
 % Apply calibration to left orientation
 Apply_FlatField_Folder([src_path filesep 'Left'],[dest_path filesep 'Left'],...
     gain, offset);
-
+%%
 % Get calibration for right orientation
 [gain, offset] = Calibrate_Orientation(src_path, dest_path, 'Right', 'RightCalibration', 0);
 % Apply calibration to left orientation

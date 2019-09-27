@@ -14,4 +14,3 @@ bitMap(bitMap ~= 0) = 1;
 % Remove the outliers from, gain, and offset data to return 
 gain   =   gain.*bitMap;
 offset = offset.*bitMap;
-
