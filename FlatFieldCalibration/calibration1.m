@@ -33,7 +33,9 @@ imagea = zeros(256,320,N); % the size of each image is 256 x 320
 
 for i = 1:N
     if exist(images{i}, 'file') == 2
-        imagea(:,:,i) = double (importdata(images{i})); 
+        % Using `imread` instead of `double(importdata())` changes the
+        % runtime on a dataset from 72 seconds to 18 seconds
+        imagea(:,:,i) = imread(images{i});
     else
         fprint('Image file not found')
     end
@@ -81,20 +83,6 @@ subplot(3,1,3), histogram(image,'BinLimits',[0,2^14]), title('Histogram of Frame
 xlabel('Pixal Intensity Value','FontSize',14);
 ylabel('Number of Pixals','FontSize',14);
 
-%% plot a single pixal calibration 
-
-row = 120
-col = 50
-C=squeeze(imagea(row,col,NN))';
-Cm=Gain(row,col).*intensity(NN)+Offset(row,col);
-
-figure
-plot(intensity(NN),C,'*')
-hold on
-plot(intensity(NN),Cm,'r')
-ylabel('Pixal Value','FontSize',14);
-xlabel('Intensity','FontSize',14);
-
 %% find the best linear fit to each pixal vs intensity
 
 A = [ intensity(NN)' ones(length(NN),1)];  % this is the A matrix
@@ -123,6 +111,19 @@ subplot(3,1,3), histogram(Offset,'BinLimits',[min(min(Offset)) max(max(Offset))]
 xlabel('Pixal Intensity Value','FontSize',14);
 ylabel('Number of Pixals','FontSize',14);
 
+%% plot a single pixal calibration 
+
+row = 120
+col = 50
+C=squeeze(imagea(row,col,NN))';
+Cm=Gain(row,col).*intensity(NN)+Offset(row,col);
+
+figure
+plot(intensity(NN),C,'*')
+hold on
+plot(intensity(NN),Cm,'r')
+ylabel('Pixal Value','FontSize',14);
+xlabel('Intensity','FontSize',14);
 
 %% plot the chi error for the fits per pixal as an image
 
