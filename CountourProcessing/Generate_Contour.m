@@ -19,12 +19,16 @@ subplot(1,2,2),contour(passBand/absorption), colormap('default'), title('Contour
 
 % Display the contour map
 figure
-contour(absorption/passBand), colorbar
+%contour(absorption/passBand), colorbar
+surf(absorption/passBand), colorbar
 
 % If search is enabled, create figure with comparison when image2 is
 % shifted by 1 pixel in all 8 directions (up, down, left, right, and
 % diagonal)
 if (search)
+    % Create array to store data
+    diffs = zeros(3,3);
+    
     figure
     % Base comparison
     subplot(3,3,5),imagesc(passBand-absorption,[-750,1700]), colormap('default'), title('Subtraction'), colorbar
@@ -50,6 +54,9 @@ if (search)
                 title( [num2str(index) ': ' num2str(sumsqr(diff),'%5f')] );
                 %text(0.5,0.5,'test text');
                 colorbar
+            end
+            if (valid)
+                diffs(row+2, col+2) = sumsqr(diff);
             end
         end
     end
