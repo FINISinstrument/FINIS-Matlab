@@ -48,17 +48,22 @@ subplot(1,2,2),imagesc(absorption), colormap('gray'), title('Absorption Band')
 
 %% manually align images
 
-%% Known methane
-passBand2 = images(170:210,1:76,707);
-absorption2 = images(183:223,223:298,762);
+%% "Known" methane
+%passBand2 = images(170:210,1:76,707);
+%absorption2 = images(183:223,223:298,762);
+passBand2 = images(180:200,11:66,707);
+absorption2 = images(193:213,233:288,762);
 %% Car driving down
 passBand = images(:,:,648);
 absorption = images(:,:,710);
 %passBand2 = images(170:210,1:76,648);
 %absorption2 = images(183:223,223:298,762);
-passBand2 = images(82:181,14:99,648);
+%passBand2 = images(82:181,14:99,648);
 %passBand2 = images(:,:,648);
-absorption2 = images(101:200,225:310,700);
+%absorption2 = images(101:200,225:310,700);
+
+%762
+%707
 
 figure
 subplot(1,2,1),imagesc(passBand2), colormap('gray'), title('Pass Band')
@@ -80,8 +85,37 @@ subplot(1,2,2), contour(absorption2/passBand2)
 
 %% Part of manually align images, just the contour
 figure
-%contour(absorption2/passBand2)
+hold on
+%imagesc(absorption2)
+colormap('gray')
 imagesc(absorption2 - passBand2)
+contour(absorption2 - passBand2)
+title('Subtraction')
+colorbar;
+saveas(gcf, 'subtraction.jpg');
+
+figure
+title('Division')
+hold on
+imagesc(absorption2)
+colormap('gray')
+%contour(absorption2 ./ passBand2)
+colorbar;
+saveas(gcf, 'division.jpg');
+
+figure
+imagesc(absorption2)
+title('Absorption')
+colormap('gray')
+colorbar;
+saveas(gcf, 'absorption.jpg');
+
+figure
+imagesc(passBand2)
+title('Passband')
+colormap('gray')
+colorbar;
+saveas(gcf, 'passband.jpg');
 
 %%
 

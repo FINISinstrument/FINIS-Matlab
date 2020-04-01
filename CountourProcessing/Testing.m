@@ -45,6 +45,38 @@ images = fliplr(images);
 Generate_Contour(images, 707, 170, 1, 762, 183, 223, 40, 75, 1);
 
 %% Car driving down
-passBand2 = images(82:181,14:99,648);
-absorption2 = images(101:200,225:310,700);
-Generate_Contour(images, 648, 82, 14, 700, 101, 225, 100, 85, 1);
+%{
+Generate_Contour(images,...
+                 image1, image1_x1, image1_y1,...
+                 image2, image2_x1, image2_y1,...
+                 width, height, search)
+%}
+
+Generate_Contour(images, 648, 82, 14, 700, 102, 226, 100, 85, 1);
+
+%% Test Car driving down
+%{
+BestMatch(images,...
+          image1, image1_x1, image1_y1,...
+          image2, width, height)
+%}
+[diff, best_row, best_col, image] = BestMatch(images, 648, 82, 14, 700, 100, 85);
+
+figure
+% Base comparison
+imagesc(image,[-750,1700])
+colormap('default')
+title( [num2str(sumsqr(diff),'%5f')] );
+colorbar
+
+%% Known methane
+[diff, best_row, best_col, image] = BestMatch(images, 707, 170, 1, 762, 40, 75);
+
+figure
+% Base comparison
+imagesc(image,[-750,1700])
+colormap('default')
+title( [num2str(sumsqr(diff),'%5f')] );
+colorbar
+
+Generate_Contour(images, 707, 170, 1, 762, best_col, best_row, 40, 75, 0);
